@@ -6,9 +6,6 @@ const bodyParser = require('body-parser');
 const mongoose   = require('mongoose');
 //-------------------------------------------------------------
 
-const userRoutes    = require('./api/routes/users');
-const stationRoutes = require('./api/routes/stations');
-
 //DB CONNECTION------------------------------------------------
 const userDB = process.env.userDB;
 const passDB = process.env.passDB;
@@ -29,13 +26,16 @@ app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", 
                "Origin, X-Requested-With, Content-Type, Accept, Authorization");
     if(req.method === "OPTIONS"){
-        res.header("Access-Control-Allow-Origin", "GET, PUT, DELETE, PATCH, POST");
+        res.header("Access-Control-Allow-Origin", "GET, DELETE, PATCH, POST");
         return res.status(200).json({});
     }
     next();
 });
 
 // Add Route---------------------------------------------------
+const userRoutes    = require('./api/routes/users');
+const stationRoutes = require('./api/routes/stations');
+
 app.use('/users', userRoutes); 
 app.use('/stations', stationRoutes); 
 //-------------------------------------------------------------

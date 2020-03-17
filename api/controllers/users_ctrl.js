@@ -1,7 +1,9 @@
+//-------------------------------------------------------------
 const mongoose = require('mongoose');
 const User     = require('../models/user_model');
 const bcrypt   = require('bcrypt');
 const jwt      = require('jsonwebtoken');
+//-------------------------------------------------------------
 
 // GET all user
 // Todo: add control for administrators only
@@ -17,12 +19,6 @@ exports.users_get_all = (req, res, next) => {
                     return {
                         email:    doc.email,
                         //password: doc.password,
-                        _id:      doc._id,
-                        request: {
-                            description: "To view this user",
-                            type: 'GET',
-                            url: 'http://localhost:3000/users/' + doc._id
-                        }
                     }
                 })
             };
@@ -35,7 +31,6 @@ exports.users_get_all = (req, res, next) => {
             }); 
         });
 }
-
 // POST request to signup and add user to the db
 exports.users_signup = (req, res, next) => {
     User
@@ -80,7 +75,6 @@ exports.users_signup = (req, res, next) => {
             }
         })
 }
-
 // POST request to login and receive TOKEN
 exports.users_login = (req, res, next) => {
     User
@@ -128,7 +122,6 @@ exports.users_login = (req, res, next) => {
         });
     })
 }
-
 // DELETE specific user
 // Todo: add control for administrators only
 exports.users_delete_user = (req, res, next) => {

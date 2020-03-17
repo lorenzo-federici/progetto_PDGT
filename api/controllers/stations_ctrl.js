@@ -1,5 +1,7 @@
+//-------------------------------------------------------------
 const Station  = require('../models/station_model');
 const mongoose = require('mongoose');
+//-------------------------------------------------------------
 
 // GET all stations
 exports.stations_get_all = (req, res, next) => {
@@ -115,7 +117,7 @@ exports.stations_add_stations = (req, res, next) => {
             }); 
         }); 
 }
-// Delete station
+// Delete specific station
 // Todo: add control for administrators only
 exports.stations_delete_station = (req, res, next) => {
     const id = req.params.stationId;
@@ -134,4 +136,41 @@ exports.stations_delete_station = (req, res, next) => {
         return res.status(200).send(response);
     });
 
+}
+// Update specific station
+// Todo: add control for administrators only
+exports.stations_update_stations = (req, res, next) => {
+    const id = req.params.stationId;
+    const updateOps = {};
+
+    const newStation = new Station({
+        Comune:    req.body.Comune,
+        Provincia: req.body.Provincia,
+        Regione:   req.body.Regione,
+        Nome:      req.body.Nome,
+        Anno_inserimento: req.body.Anno_inserimento,
+        Data_inserimento: req.body.Data_inserimento,
+        ID_OpenStreetMap: req.body.ID_OpenStreetMap,
+        Longitudine: req.body.Longitudine,
+        Latitudine:  req.body.Latitudine,
+    });
+    
+    Station
+        .updateOne({_id: id},{$set: newStation })
+        .exec()
+        .then(result => {
+            const response = {
+                message: 'Station updated',
+                request: {
+                    type: 'GET',
+                    url: 'http://localhost:3000/stations/' + id
+                }
+            }
+            res.status(200).json(response);
+        })
+        .catch(error => {
+            res.status(500).json({
+                error: error
+            }); 
+        });
 }
