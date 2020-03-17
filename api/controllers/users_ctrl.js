@@ -128,3 +128,25 @@ exports.users_login = (req, res, next) => {
         });
     })
 }
+
+// DELETE specific user
+// Todo: add control for administrators only
+exports.users_delete_user = (req, res, next) => {
+    const id = req.params.userId;
+
+    User.findByIdAndRemove(id, (error, product) => {
+        if (error) return res.status(500).send(error);
+
+        const response = {
+            message: "Product successfully deleted",
+            request: {
+                descriprion: 'To Signup',
+                type: 'POST',
+                body: { email: 'String', password: 'Number' },
+                url: 'http://localhost:3000/users/signup'
+            }
+        };
+        return res.status(200).send(response);
+    });
+
+}
