@@ -1,0 +1,36 @@
+{
+  "name": "progetto_pdgt",
+  "version": "1.0.0",
+  "description": "progetto estivo pdgt ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BillyPap3/progetto_PDGT.git"
+  },
+  "keywords": [
+    "node",
+    "restful",
+    "api",
+    "progetto-estivo",
+    "PDGT"
+  ],
+  "author": "Lorenzo Federici",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BillyPap3/progetto_PDGT/issues"
+  },
+  "homepage": "https://github.com/BillyPap3/progetto_PDGT#readme",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.5",
+    "morgan": "^1.9.1",
+    "nodemon": "^2.0.2"
+  }
+}

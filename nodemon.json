@@ -1,0 +1,8 @@
+{
+    "env": {
+        "userDB": "dbLollo",
+        "passDB": "bblollolollo",
+        "nameDB": "progetto-pdgt",
+        "JWT_KEY": "keySecret"
+    }
+}
