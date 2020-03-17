@@ -1,10 +1,13 @@
+// Package-----------------------------------------------------
 const express    = require('express');
 const app        = express();
 const morgan     = require('morgan');  // Packege for terminal's information when i send request
 const bodyParser = require('body-parser');
 const mongoose   = require('mongoose');
+//-------------------------------------------------------------
 
-const userRoutes = require('./api/routes/users');
+const userRoutes    = require('./api/routes/users');
+const stationRoutes = require('./api/routes/stations');
 
 //DB CONNECTION------------------------------------------------
 const userDB = process.env.userDB;
@@ -32,12 +35,14 @@ app.use((req, res, next) => {
     next();
 });
 
-// Add user's route
+// Add Route---------------------------------------------------
 app.use('/users', userRoutes); 
+app.use('/stations', stationRoutes); 
+//-------------------------------------------------------------
 
-//general error and route
+//general error and route--------------------------------------
 app.use((req, res, next) => {
-    const error = new Error('Not Found');
+    const error = new Error('Page Not Found');
     error.status = 404;
     next(error);
 });
@@ -50,5 +55,6 @@ app.use((error, req, res, next) => {
         }
     });
 });
+//-------------------------------------------------------------
 
 module.exports = app;
