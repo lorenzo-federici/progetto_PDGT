@@ -7,12 +7,16 @@ const mongoose   = require('mongoose');
 //-------------------------------------------------------------
 
 //DB CONNECTION------------------------------------------------
-const userDB = process.env.userDB;
-const passDB = process.env.passDB;
-const nameDB = process.env.nameDB;
+//const userDB = process.env.userDB;
+//const passDB = process.env.passDB;
+//const nameDB = process.env.nameDB;
+
+const userDB = "dbLollo";
+const passDB = "bblollolollo";
+const nameDB = "progetto-pdgt";
 
 const uri = 'mongodb+srv://'+ userDB +':'+ passDB +'@cluster0-rwc9w.mongodb.net/'+ nameDB +'?retryWrites=true&w=majority'
-mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
+mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true});
 mongoose.Promise = global.Promise;
 //-------------------------------------------------------------
 
