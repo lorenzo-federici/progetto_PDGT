@@ -40,6 +40,10 @@ app.use('/users', userRoutes);
 app.use('/stations', stationRoutes); 
 //-------------------------------------------------------------
 
+app.use('/',(req, res) => {
+    res.send('Ciao a tutti');
+});
+
 //general error and route--------------------------------------
 app.use((req, res, next) => {
     const error = new Error('Page Not Found');
