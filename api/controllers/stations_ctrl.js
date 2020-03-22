@@ -11,12 +11,12 @@ exports.stations_get_all = (req, res, next) => {
         .then(docs => {
             const response = {
                 count:   docs.length,
-                product: docs.map(doc => {
+                stations: docs.map(doc => {
                     return {
-                        //Comune:    doc.Comune,
+                        Nome:      doc.Nome,
+                        Comune:    doc.Comune,
                         //Provincia: doc.Provincia,
                         Regione:   doc.Regione,
-                        Nome:      doc.Nome,
                         //Anno_inserimento: doc.Anno_inserimento,
                         //Data_inserimento: doc.Data_inserimento,
                         //ID_OpenStreetMap: doc.ID_OpenStreetMap,
@@ -69,6 +69,53 @@ exports.stations_get_one = (req, res, next) => {
             }); 
         });
 }
+
+// GET station with differet type of request
+exports.stations_get_many = (req, res, next) => {
+    const option    = req.params.option;
+    const parameter = req.params.parameter;
+    let findkey = {}
+
+    //console.log(req.params.option)
+    if(option === "name"){
+        findkey = {Nome: parameter}
+    }else if(option === "region"){
+        findkey = {Regione: parameter}
+    }else if(option === "province"){
+        findkey = {Provincia: parameter}
+    }
+    Station
+        .find(findkey)
+        .exec()
+        .then(docs => {
+            const response = {
+                count:   docs.length,
+                stations: docs.map(doc => {
+                    return {
+                        Nome:      doc.Nome,
+                        Comune:    doc.Comune,
+                        Provincia: doc.Provincia,
+                        Regione:   doc.Regione,
+                        Longitudine: doc.Longitudine,
+                        Latitudine:  doc.Latitudine,
+                        _id: doc._id,
+                        request: {
+                            description: "To view this station",
+                            type: 'GET',
+                            url: 'http://localhost:3000/stations/' + doc._id
+                        }
+                    }
+                })
+            };
+            res.status(200).json(response);
+        })
+        .catch(error => {
+            res.status(500).json({
+                error: error
+            }); 
+        });
+}
+
 // Create new station
 // Todo: add control for administrators only
 exports.stations_add_stations = (req, res, next) => {

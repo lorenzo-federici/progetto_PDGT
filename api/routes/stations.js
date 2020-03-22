@@ -10,6 +10,7 @@ const StationController = require('../controllers/stations_ctrl');
 //-------------------------------------------------------------
 router.get('/', StationController.stations_get_all);
 router.get('/:stationId', StationController.stations_get_one);
+router.get('/:option/:parameter', StationController.stations_get_many);
 router.post('/', checkAuth, StationController.stations_add_stations);
 router.delete('/:stationId', checkAuth, StationController.stations_delete_station);
 router.patch('/:stationId', checkAuth, StationController.stations_update_stations);
