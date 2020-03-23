@@ -26,7 +26,7 @@ exports.stations_get_all = (req, res, next) => {
                         request: {
                             description: "To view this station",
                             type: 'GET',
-                            url: 'http://localhost:3000/stations/' + doc._id
+                            url: 'https://progetto-pdgt-federici.herokuapp.com/stations/' + doc._id
                         }
                     }
                 })
@@ -53,7 +53,7 @@ exports.stations_get_one = (req, res, next) => {
                     request: {
                         decription: 'To view ALL station',
                         type: 'GET',
-                        url: 'http://localhost:3000/stations/'
+                        url: 'https://progetto-pdgt-federici.herokuapp.com/stations/'
                     }
                 }
                 res.status(200).json(response);
@@ -102,7 +102,7 @@ exports.stations_get_many = (req, res, next) => {
                         request: {
                             description: "To view this station",
                             type: 'GET',
-                            url: 'http://localhost:3000/stations/' + doc._id
+                            url: 'https://progetto-pdgt-federici.herokuapp.com/stations/' + doc._id
                         }
                     }
                 })
@@ -120,14 +120,15 @@ exports.stations_get_many = (req, res, next) => {
 // Todo: add control for administrators only
 exports.stations_add_stations = (req, res, next) => {
     //aggiunta sul db
+    let datetime = new Date();
     const station = new Station({
         _id:   new mongoose.Types.ObjectId(),
         Comune:    req.body.Comune,
         Provincia: req.body.Provincia,
         Regione:   req.body.Regione,
         Nome:      req.body.Nome,
-        Anno_inserimento: req.body.Anno_inserimento,
-        Data_inserimento: req.body.Data_inserimento,
+        Anno_inserimento: datetime.getFullYear(),
+        Data_inserimento: datetime,
         ID_OpenStreetMap: req.body.ID_OpenStreetMap,
         Longitudine: req.body.Longitudine,
         Latitudine:  req.body.Latitudine,
@@ -153,7 +154,7 @@ exports.stations_add_stations = (req, res, next) => {
                 request: {
                     description: "To view it",
                     type: 'GET',
-                    url: 'http://localhost:3000/stations/' + result._id
+                    url: 'https://progetto-pdgt-federici.herokuapp.com/stations/' + result._id
                 }
             }
             res.status(200).json(response);
@@ -177,7 +178,7 @@ exports.stations_delete_station = (req, res, next) => {
             request: {
                 decription: 'To view ALL station',
                 type: 'GET',
-                url: 'http://localhost:3000/stations/'
+                url: 'https://progetto-pdgt-federici.herokuapp.com/stations/'
             }
         };
         return res.status(200).send(response);
@@ -210,7 +211,7 @@ exports.stations_update_stations = (req, res, next) => {
                 message: 'Station updated',
                 request: {
                     type: 'GET',
-                    url: 'http://localhost:3000/stations/' + id
+                    url: 'https://progetto-pdgt-federici.herokuapp.com/stations/' + id
                 }
             }
             res.status(200).json(response);

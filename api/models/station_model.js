@@ -8,7 +8,7 @@ const stationSchema = mongoose.Schema({
     Nome: { type: String, required: true },
     Anno_inserimento: { type: Number, required: true },
     Data_inserimento: { type: String, required: true },
-    ID_OpenStreetMap: { type: Number, required: true },
+    ID_OpenStreetMap: { type: Number, required: true , default: 0},
     Longitudine: { type: Number, required: true },
     Latitudine: { type: Number, required: true }
 });
