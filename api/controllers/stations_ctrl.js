@@ -1,89 +1,33 @@
 //-------------------------------------------------------------
 const Station  = require('../models/station_model');
 const mongoose = require('mongoose');
+const axios = require('axios');
+const geolib = require('geolib');
 //-------------------------------------------------------------
 
-// GET all stations
-exports.stations_get_all = (req, res, next) => {
-    Station
-        .find()
-        .exec()
-        .then(docs => {
-            const response = {
-                count:   docs.length,
-                stations: docs.map(doc => {
-                    return {
-                        Nome:      doc.Nome,
-                        Comune:    doc.Comune,
-                        //Provincia: doc.Provincia,
-                        Regione:   doc.Regione,
-                        //Anno_inserimento: doc.Anno_inserimento,
-                        //Data_inserimento: doc.Data_inserimento,
-                        //ID_OpenStreetMap: doc.ID_OpenStreetMap,
-                        //Longitudine: doc.Longitudine,
-                        //Latitudine:  doc.Latitudine,
-                        _id: doc._id,
-                        request: {
-                            description: "To view this station",
-                            type: 'GET',
-                            url: 'https://progetto-pdgt-federici.herokuapp.com/stations/' + doc._id
-                        }
-                    }
-                })
-            };
-            res.status(200).json(response);
-        })
-        .catch(error => {
-            res.status(500).json({
-                error: error
-            }); 
-        });
-}
-// GET one station with id
-exports.stations_get_one = (req, res, next) => {
-    const id = req.params.stationId;
-
-    Station
-        .findById(id)
-        .exec()
-        .then(doc => {
-            if(doc){
-                const response = {
-                    station: doc,
-                    request: {
-                        decription: 'To view ALL station',
-                        type: 'GET',
-                        url: 'https://progetto-pdgt-federici.herokuapp.com/stations/'
-                    }
-                }
-                res.status(200).json(response);
-
-            }else{
-                const response = { message: "No valid entry found for provided ID" }
-                res.status(404).json(response);
-            }
-        })
-        .catch(error => {
-            res.status(500).json({
-                error: error
-            }); 
-        });
-}
-
 // GET station with differet type of request
-exports.stations_get_many = (req, res, next) => {
+exports.stations_get_stations = (req, res, next) => {
     const option    = req.params.option;
-    const parameter = new RegExp('\\b' + req.params.parameter + '\\b', 'i');
-    let findkey = {}
+    const parameter = (option === "id") ? req.query.prm : (new RegExp('\\b' + req.query.prm + '\\b', 'i'));
+    let findkey     = {}
 
-    //console.log(req.params.option)
-    if(option === "name"){
-        findkey = {Nome: parameter}
-    }else if(option === "region"){
-        findkey = {Regione: parameter}
-    }else if(option === "province"){
-        findkey = {Provincia: parameter}
-    }
+    switch (option) {
+        case "name":
+            findkey = {Nome: parameter}
+            break;
+        case "region":
+            findkey = {Regione: parameter}
+             break;
+        case "province":
+            findkey = {Provincia: parameter}
+            break;
+        case "id":
+            findkey = {_id: req.query.prm}
+            break;
+        default:
+            findkey = {}
+            break;
+      }
     Station
         .find(findkey)
         .exec()
@@ -102,7 +46,7 @@ exports.stations_get_many = (req, res, next) => {
                         request: {
                             description: "To view this station",
                             type: 'GET',
-                            url: 'https://progetto-pdgt-federici.herokuapp.com/stations/' + doc._id
+                            url: 'https://progetto-pdgt-federici.herokuapp.com/stations/id?prm=' + doc._id
                         }
                     }
                 })
@@ -221,3 +165,91 @@ exports.stations_update_stations = (req, res, next) => {
             }); 
         });
 }
+// GET one station with longitude & latitude
+exports.stations_get_one_near = (req, res, next) => {
+    const latitude = req.query.lat;
+    const longitude = req.query.long;
+    
+    var home = {
+        latitude: latitude,
+        longitude: longitude
+    };
+
+    const params = {
+        locate: latitude+","+longitude,
+        json: '1'
+    }
+
+    axios.get('https://geocode.xyz', {params})
+    .then(response => {
+        //console.log(response.data.alt.loc.prov);
+
+        const parameter = new RegExp('\\b' + response.data.alt.loc.prov + '\\b', 'i');
+        let findkey = {Regione: parameter}
+        
+        Station
+            .find(findkey)
+            .exec()
+            .then(docs => {
+                const response = {
+                    count:   docs.length,
+                    stations: docs.map(doc => {
+                        return {
+                            Nome:      doc.Nome,
+                            Comune:    doc.Comune,
+                            Provincia: doc.Provincia,
+                            Regione:   doc.Regione,
+                            Longitudine: doc.Longitudine,
+                            Latitudine:  doc.Latitudine,
+                            _id: doc._id,
+                            request: {
+                                description: "To view this station",
+                                type: 'GET',
+                                url: 'https://progetto-pdgt-federici.herokuapp.com/stations/' + doc._id
+                            }
+                        }
+                    })
+                };
+                
+                res.status(200).json(getNearStation(home, response.count, response.stations));
+            })
+            .catch(error => {
+                res.status(500).json({
+                    error: error
+                }); 
+            });
+    }).catch(error => {
+        console.log(error);
+    });
+
+}
+
+function getNearStation(home,number, stations){
+    let i = 1
+    let j = 0
+    let destination = [
+        {
+            lat: stations[0].Latitudine,
+            lon: stations[0].Longitudine
+        },{
+            lat: stations[1].Latitudine,
+            lon: stations[1].Longitudine
+        }
+    ];
+
+    do{
+        if((geolib.getDistance( home, destination[1])/1000) < (geolib.getDistance( home, destination[0])/1000)){
+            destination[0] = destination[1]
+            j=i
+        }
+        destination[1] = {
+            lat: stations[i].Latitudine,
+            lon: stations[i].Longitudine
+        }
+        i++;
+    }while(i < number)
+
+    return stations[j]
+    
+}
+
