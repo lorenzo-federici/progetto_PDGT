@@ -39,7 +39,7 @@ exports.stations_get_all = (req, res, next) => {
             }); 
         });
 }
-// GET one station
+// GET one station with id
 exports.stations_get_one = (req, res, next) => {
     const id = req.params.stationId;
 
@@ -73,7 +73,7 @@ exports.stations_get_one = (req, res, next) => {
 // GET station with differet type of request
 exports.stations_get_many = (req, res, next) => {
     const option    = req.params.option;
-    const parameter = req.params.parameter;
+    const parameter = new RegExp('\\b' + req.params.parameter + '\\b', 'i');
     let findkey = {}
 
     //console.log(req.params.option)
@@ -115,7 +115,6 @@ exports.stations_get_many = (req, res, next) => {
             }); 
         });
 }
-
 // Create new station
 // Todo: add control for administrators only
 exports.stations_add_stations = (req, res, next) => {
