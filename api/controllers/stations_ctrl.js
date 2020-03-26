@@ -182,10 +182,13 @@ exports.stations_get_one_near = (req, res, next) => {
 
     axios.get('https://geocode.xyz', {params})
     .then(response => {
-        //console.log(response.data.alt.loc.prov);
 
-        const parameter = new RegExp('\\b' + response.data.alt.loc.prov + '\\b', 'i');
-        let findkey = {Regione: parameter}
+        let findkey = {}
+        const parameter = new RegExp('\\b' + response.data.state + '\\b', 'i');
+        //if goecode api doesn't work
+        if(response.data.state.length != undefined){
+            findkey = {Regione: parameter}
+        }
         
         Station
             .find(findkey)
@@ -248,7 +251,8 @@ function getNearStation(home,number, stations){
         }
         i++;
     }while(i < number)
-
+    stations[j]["Distanza"] = geolib.getDistance( home, destination[0])/1000+" km"
+    
     return stations[j]
     
 }
