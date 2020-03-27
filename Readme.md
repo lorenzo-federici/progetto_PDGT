@@ -137,7 +137,7 @@ All'interno dell'app si fa uso delle *API* pubbliche messe a disposizione da [Ge
 https://progetto-pdgt-federici.herokuapp.com/stations/view/all : Visualizza tutte le stazioni.
 
 *es.di risposta*
-```json
+```js
 {
     "count": 27,
     "stations": [
@@ -177,7 +177,7 @@ https://progetto-pdgt-federici.herokuapp.com/stations/view/all : Visualizza tutt
 https://progetto-pdgt-federici.herokuapp.com/stations/near/?lat=LATITUDINE&long=LONGITUDINE : Visualizza la stazione piu vicina al punto dato. Richiede nell'header l'autenticazione tramite il *TOKEN*;
 
 *es.di risposta*
-```json
+```js
 //https://progetto-pdgt-federici.herokuapp.com/stations/near/?lat=43.71693&long=12.9825
 {
     "Nome": "Marotta-Mondolfo",
@@ -199,7 +199,7 @@ https://progetto-pdgt-federici.herokuapp.com/stations/near/?lat=LATITUDINE&long=
 https://progetto-pdgt-federici.herokuapp.com/stations/view/name?prm=NOME_STAZIONE : Visualizza la stazione con il nome ricercato. Richiede nell'header l'autenticazione tramite il *TOKEN*;
 
 *es.di risposta*
-```json
+```js
 {
     //https://progetto-pdgt-federici.herokuapp.com/stations/view/name?prm=pesaro
     "count": 1,
@@ -231,7 +231,7 @@ https://progetto-pdgt-federici.herokuapp.com/stations/view/region?prm=REGIONE_ST
 
 https://progetto-pdgt-federici.herokuapp.com/stations/ : aggiunge una nuova stazione. Il *body* dovra essere:
 
-```json
+```js
 {
     //_id:                aggiunto in automatico
     "Comune":           "Comune_stazione_nuova",
@@ -248,7 +248,7 @@ https://progetto-pdgt-federici.herokuapp.com/stations/ : aggiunge una nuova staz
 Richiede nell'header l'autenticazione tramite il *TOKEN*;
 
 *es.di risposta*
-```json
+```js
 {
  "message": "Station added successfully",
     "addedStation": {
@@ -276,7 +276,7 @@ Richiede nell'header l'autenticazione tramite il *TOKEN*;
 https://progetto-pdgt-federici.herokuapp.com/stations/ID_STAZIONE : elimina la stazione avente l'ID passato nell'url. Richiede nell'header l'autenticazione tramite il *TOKEN*, ed è riservato solo agli *admin* (ecco perchè per eliminare una stazione bisogna passare nell'url l'id, parametro che solo l'amministratore può visualizzare/sapere).
 
 *es.di risposta*
-```json
+```js
 {
     "message": "Station successfully deleted",
     "request": {
@@ -290,7 +290,7 @@ https://progetto-pdgt-federici.herokuapp.com/stations/ID_STAZIONE : elimina la s
 **PATCH**
 https://progetto-pdgt-federici.herokuapp.com/stations/ID_STAZIONE : modifica una stazione avente l'ID passato nell'url. Richiede nell'header l'autenticazione tramite il *TOKEN*, ed è riservato solo agli *admin*. Il *body* dovra essere:
 
-```json
+```js
 {
     "Comune":           "Comune_stazione_aggiornato",
     "Provincia":        "Provincia_stazione_aggiornato",
@@ -309,7 +309,7 @@ Se si vuol cambiare soltanto un campo allora sara necessario immettere solo quel
 https://progetto-pdgt-federici.herokuapp.com/users/ : restuisce tutti gli utenti registrati. Richiede nell'header l'autenticazione tramite il *TOKEN*.
 
 *es.di risposta*
-```json
+```js
 {
     "count": 17,
     "user": [
@@ -333,7 +333,7 @@ https://progetto-pdgt-federici.herokuapp.com/users/ : restuisce tutti gli utenti
 **POST**
 https://progetto-pdgt-federici.herokuapp.com/users/signup/ : serve per registrare un utente. Richiede nell'header l'autenticazione tramite il *TOKEN*. Il *body* dovra essere:
 
-```json
+```js
 {
     "email":    "Email_utente_nuovo",
     "password": "Password_utente_nuovo"
@@ -341,7 +341,7 @@ https://progetto-pdgt-federici.herokuapp.com/users/signup/ : serve per registrar
 ```
 
 *es.di risposta*
-```json
+```js
 {
     "message": "User Created"
 }
@@ -349,7 +349,7 @@ https://progetto-pdgt-federici.herokuapp.com/users/signup/ : serve per registrar
 
 https://progetto-pdgt-federici.herokuapp.com/users/login/ : serve per far loggare un utente. Richiede nell'header l'autenticazione tramite il *TOKEN*. Il *body* dovra essere:
 
-```json
+```js
 {
     "email":    "Email_utente_esistente",
     "password": "Password_utente_esistente"
@@ -357,7 +357,7 @@ https://progetto-pdgt-federici.herokuapp.com/users/login/ : serve per far loggar
 ```
 
 *es.di risposta*
-```json
+```js
 {
     "message": "Auth successful",
     "token": "tkn.exmpl.tkn",
@@ -369,7 +369,7 @@ https://progetto-pdgt-federici.herokuapp.com/users/login/ : serve per far loggar
 https://progetto-pdgt-federici.herokuapp.com/users/ID_UTENTE : serve per eliminare un utente avente l'ID passato nell'url. Richiede nell'header l'autenticazione tramite il *TOKEN*.
 
 *es.di risposta*
-```json
+```js
 {
     "message":          "User successfully deleted",
     "request": {
@@ -385,8 +385,6 @@ https://progetto-pdgt-federici.herokuapp.com/users/ID_UTENTE : serve per elimina
 
 ## Esempi d'uso
 
-o Esempio descrittivo di utilizzo del servizio Web (sequenza di
-richieste/risposte HTTP di esempio, descrizione dei dati attesi/ottenuti), se il progetto è composto anche da un client, eventuali screenshot che ne dimostrano l’utilizzo.
 
 
 
