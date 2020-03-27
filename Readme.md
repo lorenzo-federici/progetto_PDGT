@@ -132,8 +132,10 @@ All'interno dell'app si fa uso delle *API* pubbliche messe a disposizione da [Ge
 
 ### Stazioni:
 **GET**
-
-https://progetto-pdgt-federici.herokuapp.com/stations/view/all : Visualizza tutte le stazioni.
+```
+https://progetto-pdgt-federici.herokuapp.com/stations/view/all 
+```
+: Visualizza tutte le stazioni.
 
 *es.di risposta*
 ```js
@@ -170,8 +172,10 @@ https://progetto-pdgt-federici.herokuapp.com/stations/view/all : Visualizza tutt
     ...
 ]
 ```
-
-https://progetto-pdgt-federici.herokuapp.com/stations/near/?lat=LATITUDINE&long=LONGITUDINE : Visualizza la stazione piu vicina al punto dato. Richiede nell'header l'autenticazione tramite il *TOKEN*;
+```
+https://progetto-pdgt-federici.herokuapp.com/stations/near/?lat=LATITUDINE&long=LONGITUDINE 
+```
+: Visualizza la stazione piu vicina al punto dato. Richiede nell'header l'autenticazione tramite il *TOKEN*;
 
 *es.di risposta*
 ```js
@@ -192,8 +196,10 @@ https://progetto-pdgt-federici.herokuapp.com/stations/near/?lat=LATITUDINE&long=
 "Distanza": "13.763 km"
 
 ```
-
-https://progetto-pdgt-federici.herokuapp.com/stations/view/name?prm=NOME_STAZIONE : Visualizza la stazione con il nome ricercato. Richiede nell'header l'autenticazione tramite il *TOKEN*;
+```
+https://progetto-pdgt-federici.herokuapp.com/stations/view/name?prm=NOME_STAZIONE 
+```
+: Visualizza la stazione con il nome ricercato. Richiede nell'header l'autenticazione tramite il *TOKEN*;
 
 *es.di risposta*
 ```js
@@ -217,15 +223,21 @@ https://progetto-pdgt-federici.herokuapp.com/stations/view/name?prm=NOME_STAZION
 ]
 
 ```
-
-https://progetto-pdgt-federici.herokuapp.com/stations/view/province?prm=PROVINCIA_STAZIONE : Visualizza tutte le stazioni nella provincia data. Richiede nell'header l'autenticazione tramite il *TOKEN*;
-
-https://progetto-pdgt-federici.herokuapp.com/stations/view/region?prm=REGIONE_STAZIONE : Visualizza tutte le stazioni nella regione data. Richiede nell'header l'autenticazione tramite il *TOKEN*;
+```
+https://progetto-pdgt-federici.herokuapp.com/stations/view/province?prm=PROVINCIA_STAZIONE 
+```
+: Visualizza tutte le stazioni nella provincia data. Richiede nell'header l'autenticazione tramite il *TOKEN*;
+```
+https://progetto-pdgt-federici.herokuapp.com/stations/view/region?prm=REGIONE_STAZIONE 
+```
+: Visualizza tutte le stazioni nella regione data. Richiede nell'header l'autenticazione tramite il *TOKEN*;
 
 
 **POST**
-
-https://progetto-pdgt-federici.herokuapp.com/stations/ : aggiunge una nuova stazione. Il *body* dovra essere:
+```
+https://progetto-pdgt-federici.herokuapp.com/stations/ 
+```
+: aggiunge una nuova stazione. Il *body* dovra essere:
 
 ```js
 
@@ -266,8 +278,10 @@ Richiede nell'header l'autenticazione tramite il *TOKEN*;
 ```
 
 **DELETE**
-
-https://progetto-pdgt-federici.herokuapp.com/stations/ID_STAZIONE : elimina la stazione avente l'ID passato nell'url. Richiede nell'header l'autenticazione tramite il *TOKEN*, ed è riservato solo agli *admin* (ecco perchè per eliminare una stazione bisogna passare nell'url l'id, parametro che solo l'amministratore può visualizzare/sapere).
+```
+https://progetto-pdgt-federici.herokuapp.com/stations/ID_STAZIONE 
+```
+: elimina la stazione avente l'ID passato nell'url. Richiede nell'header l'autenticazione tramite il *TOKEN*, ed è riservato solo agli *admin* (ecco perchè per eliminare una stazione bisogna passare nell'url l'id, parametro che solo l'amministratore può visualizzare/sapere).
 
 *es.di risposta*
 ```js
@@ -279,7 +293,10 @@ https://progetto-pdgt-federici.herokuapp.com/stations/ID_STAZIONE : elimina la s
 ```
 
 **PATCH**
-https://progetto-pdgt-federici.herokuapp.com/stations/ID_STAZIONE : modifica una stazione avente l'ID passato nell'url. Richiede nell'header l'autenticazione tramite il *TOKEN*, ed è riservato solo agli *admin*. Il *body* dovra essere:
+```
+https://progetto-pdgt-federici.herokuapp.com/stations/ID_STAZIONE 
+```
+: modifica una stazione avente l'ID passato nell'url. Richiede nell'header l'autenticazione tramite il *TOKEN*, ed è riservato solo agli *admin*. Il *body* dovra essere:
 
 ```js
 "Comune":           "Comune_stazione_aggiornato",
@@ -295,7 +312,10 @@ Se si vuol cambiare soltanto un campo allora sara necessario immettere solo quel
 ### Utenti
 
 **GET**
-https://progetto-pdgt-federici.herokuapp.com/users/ : restuisce tutti gli utenti registrati. Richiede nell'header l'autenticazione tramite il *TOKEN*.
+```
+https://progetto-pdgt-federici.herokuapp.com/users/ 
+```
+: restuisce tutti gli utenti registrati. Richiede nell'header l'autenticazione tramite il *TOKEN*.
 
 *es.di risposta*
 ```js
@@ -318,7 +338,10 @@ https://progetto-pdgt-federici.herokuapp.com/users/ : restuisce tutti gli utenti
 ```
 
 **POST**
-https://progetto-pdgt-federici.herokuapp.com/users/signup/ : serve per registrare un utente. Richiede nell'header l'autenticazione tramite il *TOKEN*. Il *body* dovra essere:
+```
+https://progetto-pdgt-federici.herokuapp.com/users/signup/ 
+```
+: serve per registrare un utente. Richiede nell'header l'autenticazione tramite il *TOKEN*. Il *body* dovra essere:
 
 ```js
 "email":    "Email_utente_nuovo",
@@ -329,8 +352,10 @@ https://progetto-pdgt-federici.herokuapp.com/users/signup/ : serve per registrar
 ```js
 "message": "User Created"
 ```
-
-https://progetto-pdgt-federici.herokuapp.com/users/login/ : serve per far loggare un utente. Richiede nell'header l'autenticazione tramite il *TOKEN*. Il *body* dovra essere:
+```
+https://progetto-pdgt-federici.herokuapp.com/users/login/
+```
+: serve per far loggare un utente. Richiede nell'header l'autenticazione tramite il *TOKEN*. Il *body* dovra essere:
 
 ```js
 "email":    "Email_utente_esistente",
@@ -345,7 +370,10 @@ https://progetto-pdgt-federici.herokuapp.com/users/login/ : serve per far loggar
 ```
 
 **DELETE**
-https://progetto-pdgt-federici.herokuapp.com/users/ID_UTENTE : serve per eliminare un utente avente l'ID passato nell'url. Richiede nell'header l'autenticazione tramite il *TOKEN*.
+```
+https://progetto-pdgt-federici.herokuapp.com/users/ID_UTENTE 
+```
+: serve per eliminare un utente avente l'ID passato nell'url. Richiede nell'header l'autenticazione tramite il *TOKEN*.
 
 *es.di risposta*
 ```js
