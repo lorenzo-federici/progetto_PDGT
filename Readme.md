@@ -114,7 +114,7 @@ i moduli utilizzati sono:
 "axios":                 "^0.19.2",
 "dotenv":                "^8.2.0",
 "node-telegram-bot-api": "^0.40.0",
-"nodemon":               "^2.0.2",
+"nodemon":               "^2.0.2"
 
 ```
 [BotTelegramGit](https://github.com/BillyPap3/botTelegram_PDGT)
