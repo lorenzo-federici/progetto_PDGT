@@ -137,7 +137,6 @@ https://progetto-pdgt-federici.herokuapp.com/stations/view/all : Visualizza tutt
 
 *es.di risposta*
 ```js
-
 "count": 27,
 "stations": [
     {
@@ -170,7 +169,6 @@ https://progetto-pdgt-federici.herokuapp.com/stations/view/all : Visualizza tutt
     },
     ...
 ]
-
 ```
 
 https://progetto-pdgt-federici.herokuapp.com/stations/near/?lat=LATITUDINE&long=LONGITUDINE : Visualizza la stazione piu vicina al punto dato. Richiede nell'header l'autenticazione tramite il *TOKEN*;
@@ -199,7 +197,6 @@ https://progetto-pdgt-federici.herokuapp.com/stations/view/name?prm=NOME_STAZION
 
 *es.di risposta*
 ```js
-
 //https://progetto-pdgt-federici.herokuapp.com/stations/view/name?prm=pesaro
 "count": 1,
 "stations": [
@@ -242,13 +239,11 @@ https://progetto-pdgt-federici.herokuapp.com/stations/ : aggiunge una nuova staz
 "ID_OpenStreetMap": "ID_OpenStreetMap_stazione_nuova", //se non messo è di default 0
 "Longitudine":      "Longitudine_stazione_nuova",
 "Latitudine":       "Latitudine_stazione_nuova" 
-
 ```
 Richiede nell'header l'autenticazione tramite il *TOKEN*;
 
 *es.di risposta*
 ```js
-
 "message": "Station added successfully",
 "addedStation": {
     "Comune": "FANO",
@@ -276,14 +271,11 @@ https://progetto-pdgt-federici.herokuapp.com/stations/ID_STAZIONE : elimina la s
 
 *es.di risposta*
 ```js
-
 "message": "Station successfully deleted",
 "request": {
     "decription": "To view ALL station",
     "type": "GET",
     "url": "https://progetto-pdgt-federici.herokuapp.com/stations/"
-}
-
 ```
 
 **PATCH**
@@ -297,7 +289,6 @@ https://progetto-pdgt-federici.herokuapp.com/stations/ID_STAZIONE : modifica una
 "ID_OpenStreetMap": "ID_OpenStreetMap_stazione_aggiornato",
 "Longitudine":      "Longitudine_stazione_aggiornato",
 "Latitudine":       "Latitudine_stazione_aggiornato" 
-
 ```
 Se si vuol cambiare soltanto un campo allora sara necessario immettere solo quel campo nella richiesta.
 
@@ -332,13 +323,11 @@ https://progetto-pdgt-federici.herokuapp.com/users/signup/ : serve per registrar
 ```js
 "email":    "Email_utente_nuovo",
 "password": "Password_utente_nuovo"
-
 ```
 
 *es.di risposta*
 ```js
 "message": "User Created"
-
 ```
 
 https://progetto-pdgt-federici.herokuapp.com/users/login/ : serve per far loggare un utente. Richiede nell'header l'autenticazione tramite il *TOKEN*. Il *body* dovra essere:
