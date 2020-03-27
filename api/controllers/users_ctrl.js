@@ -134,7 +134,7 @@ exports.users_delete_user = (req, res, next) => {
         if (error) return res.status(500).send(error);
 
         const response = {
-            message: "Product successfully deleted",
+            message: "User successfully deleted",
             request: {
                 descriprion: 'To Signup',
                 type: 'POST',
