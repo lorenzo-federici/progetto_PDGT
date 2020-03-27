@@ -29,7 +29,7 @@ exports.users_get_all = (req, res, next) => {
         .catch(error => {
             // User not found
             res.status(500).json({
-                error: error
+                message: error
             }); 
         });
 }
@@ -51,7 +51,7 @@ exports.users_signup = (req, res, next) => {
                     if (error){
                         // Encryption error
                         return res.status(500).json({
-                            error: error
+                            message: "Password Error"
                         });
                     }else{
                         // Store hash in password DB.
@@ -69,7 +69,7 @@ exports.users_signup = (req, res, next) => {
                             })
                             .catch(error => {
                                 res.status(500).json({
-                                    error: error
+                                    message: "Signup fail"
                                 });
                             })
                     }
@@ -121,7 +121,7 @@ exports.users_login = (req, res, next) => {
     })
     .catch(error => {
         res.status(500).json({
-            error: error
+            message: error
         });
     })
 }
