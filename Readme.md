@@ -403,6 +403,8 @@ View Users |
 View nearest Stations | View nearest Stations
 Logout | Logout
 
+![IMG_1484](https://user-images.githubusercontent.com/36625993/77826898-b1873680-7112-11ea-8a53-06ea98362871.PNG)
+
 **USER**
 
 ***View Stations***
