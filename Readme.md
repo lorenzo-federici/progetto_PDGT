@@ -55,7 +55,7 @@ npm install --save body-parser morgan nodemon
 ```
 
 Si è scelto l'utilizzo di mongoDB come databese base, molto piu semplice, veloce ed intuitivo dei databese di concorrenza basati sul linguaggio SQL.
-In esso si è scelto di utilizzare due tabelle una per gli **Utenti** e laltra per le varie **Stazioni**.
+In esso si è scelto di utilizzare due tabelle una per gli **Utenti** e l'altra per le varie **Stazioni**.
 
 **Tabella Utente**
 ```js
@@ -388,6 +388,56 @@ Serve per eliminare un utente avente l'ID passato nell'url. Richiede nell'header
 ```
 
 ## Esempi d'uso
+
+### Bot Telegram 
+
+Le operazioni tra admin e utente normale sono differenti:
+
+ADMIN | USER
+------------ | -------------
+View Stations (con ID) | view Stations
+Add Stations | Delete me
+Update Stations | 
+Delete Stations | 
+View Users | 
+View nearest Stations | View nearest Stations
+Logout | Logout
+
+**USER**
+
+***View Stations***
+
+*Tutte*
+
+*Per Nome*
+
+*Per Regione*
+
+*Per Provincia*
+
+***View nearest Stations***
+
+***Delete me***
+
+**ADMIN**
+
+***View Stations***
+
+La differenza con l'utente normale è che sarà visualizzato anche l'ID, questo perchè l'amministratore potrà anche modificare, aggiungere e eliminare le stazioni. 
+
+***View Users***
+
+***Add Stations***
+
+***Update Stations***
+
+Quando si sceglierà questa opzione il bot chiederà le opzioni che l'utente vorrà aggiornare.
+
+Una volta scritto le opzioni da aggiornare bisognerà scrivere L'ID della stazione da aggiornare seguita dalle informazioni aggiornate, separate da uno spazio.
+Molto macchinoso , questo perchè i bot telegram non supportano le form, ma è un operazione che soltanto un amministratore può fare. Uno sviluppo futuro potrebbe essere che nel momento in cui l'amministratore sceglie l'opzione di aggiornare una stazione sarà reindirizzato ad una pagina web con una form di modifica delle stazioni. 
+
+***Delete Stations***
+
 
 
 
