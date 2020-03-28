@@ -34,11 +34,11 @@ npm install bcrypt --save
 ```bash
 npm install express --save
 ```
--**geolib**: modulo utilizzato per calcolare la distanza tra dua punti geografici utilizzando Latitudine e Longitudine
+-**geolib**: modulo utilizzato per calcolare la distanza tra dua punti geografici utilizzando latitudine e longitudine
 ```bash
 npm install geolib --save
 ```
--**jsonwebtoken**: set di funzioni per utilizzare i token di accesso un volta essersi loggati
+-**jsonwebtoken**: set di funzioni per utilizzare i token di accesso una volta essersi loggati
 ```bash
 npm install jsonwebtoken --save
 ```
@@ -54,8 +54,8 @@ npm install mongoose --save
 npm install --save body-parser morgan nodemon
 ```
 
-Si è scelto l'utilizzo di mongoDB come databese base, molto piu semplice, veloce ed intuitivo dei databese di concorrenza basati sul linguaggio SQL.
-In esso si è scelto di utilizzare due tabelle una per gli **Utenti** e l'altra per le varie **Stazioni**.
+Si è scelto l'utilizzo di mongoDB come databese base poiche grazie ad un seti di funzioni è ritenuto molto piu semplice, veloce ed intuitivo dei databese di concorrenza basati sul linguaggio SQL.
+In esso si è scelto di inserire due tabelle: una per gli **Utenti** e l'altra per le varie **Stazioni**.
 
 **Tabella Utente**
 ```js
@@ -108,7 +108,7 @@ Per il *deploy* del server si è utilizzato il servizio web **Heroku**, ricavand
 https://progetto-pdgt-federici.herokuapp.com
 
 Riguardo il lato *client* si è scelto di implementarlo in un *bot telegram*, questo perchè è uno dei tipi di client piu semplici e intuitivi per visualizzare/manipolare i dati ricavati dalle API.
-i moduli utilizzati sono: 
+I moduli utilizzati sono: 
 ```js
 
 "axios":                 "^0.19.2",
@@ -123,10 +123,10 @@ i moduli utilizzati sono:
 
 ## Dati & Servizi esterni
 ### Dati
-I dati, riguardanti le posizioni delle stazioni, utilizzati sono ricavati dal sito [DatiOpen](http://www.datiopen.it/it/opendata/Mappa_delle_stazioni_ferroviarie_in_Italia)
+I dati riguardanti le posizioni delle stazioni utilizzati sono ricavati dal sito [DatiOpen](http://www.datiopen.it/it/opendata/Mappa_delle_stazioni_ferroviarie_in_Italia)
 
 ### Servizi esterni
-All'interno dell'app si fa uso delle *API* pubbliche messe a disposizione da [Geocode](https://geocode.xyz/api) che permetterà il reverse-geocoding di una posizione e ricavare cosi da latitudine e longitudine la regione riguardante.
+All'interno dell'app si fa uso delle *API* pubbliche messe a disposizione da [Geocode](https://geocode.xyz/api) che permettono il reverse-geocoding di una posizione e il ricavo da latitudine e longitudine della regione riguardante.
 
 ## Documentazione API
 
@@ -281,7 +281,7 @@ Richiede nell'header l'autenticazione tramite il *TOKEN*;
 ```
 https://progetto-pdgt-federici.herokuapp.com/stations/ID_STAZIONE 
 ```
-Elimina la stazione avente l'ID passato nell'url. Richiede nell'header l'autenticazione tramite il *TOKEN*, ed è riservato solo agli *admin* (ecco perchè per eliminare una stazione bisogna passare nell'url l'id, parametro che solo l'amministratore può visualizzare/sapere).
+Elimina la stazione avente l'ID passato nell'url. Richiede nell'header l'autenticazione tramite il *TOKEN*, ed è riservato solo agli *admin* (ecco perchè per eliminare una stazione bisogna passare nell'url l'id, parametro che solo l'amministratore può visualizzare/conoscere).
 
 *es.di risposta*
 ```js
@@ -307,7 +307,7 @@ Modifica una stazione avente l'ID passato nell'url. Richiede nell'header l'auten
 "Longitudine":      "Longitudine_stazione_aggiornato",
 "Latitudine":       "Latitudine_stazione_aggiornato" 
 ```
-Se si vuol cambiare soltanto un campo allora sara necessario immettere solo quel campo nella richiesta.
+Se si vuol cambiare soltanto un campo allora sarà necessario immettere solo quel campo nella richiesta.
 
 ### Utenti
 
@@ -315,7 +315,7 @@ Se si vuol cambiare soltanto un campo allora sara necessario immettere solo quel
 ```
 https://progetto-pdgt-federici.herokuapp.com/users/ 
 ```
-Restuisce tutti gli utenti registrati. Richiede nell'header l'autenticazione tramite il *TOKEN*.
+Restituisce tutti gli utenti registrati. Richiede nell'header l'autenticazione tramite il *TOKEN*.
 
 *es.di risposta*
 ```js
@@ -411,7 +411,7 @@ Logout | Logout
 
 **USER**
 
-*Operazioni dell'utente: *
+*Operazioni dell'utente:*
 
 ![IMG_1485](https://user-images.githubusercontent.com/36625993/77826923-ebf0d380-7112-11ea-9724-915c33763989.PNG)
 
@@ -456,7 +456,7 @@ Logout | Logout
 
 ![IMG_1499](https://user-images.githubusercontent.com/36625993/77827111-1727f280-7114-11ea-9cc8-93b2c6d12567.PNG)
 
-La differenza con l'utente normale è che sarà visualizzato anche l'ID, questo perchè l'amministratore potrà anche modificare, aggiungere e eliminare le stazioni. 
+La differenza con l'utente normale è che sarà visualizzato anche l'ID. Questo perchè l'amministratore potrà anche modificare, aggiungere e eliminare le stazioni. 
 
 ***View Users***
 
@@ -472,13 +472,13 @@ Quando si sceglierà questa opzione il bot chiederà le opzioni che l'utente vor
 
 ![IMG_1504](https://user-images.githubusercontent.com/36625993/77827188-843b8800-7114-11ea-9047-aebd647902b0.PNG)
 
-Una volta scritto le opzioni da aggiornare bisognerà scrivere L'ID della stazione da aggiornare seguita dalle informazioni aggiornate, separate da uno spazio.
-Molto macchinoso , questo perchè i bot telegram non supportano le form, ma è un operazione che soltanto un amministratore può fare. Uno sviluppo futuro potrebbe essere che nel momento in cui l'amministratore sceglie l'opzione di aggiornare una stazione sarà reindirizzato ad una pagina web con una form di modifica delle stazioni. 
+Una volta scritte le opzioni da aggiornare bisognerà scrivere l'ID della stazione da aggiornare seguita dalle informazioni aggiornate, separate da uno spazio.
+Molto macchinoso perchè i bot telegram non supportano le form ma è un operazione che soltanto un amministratore può fare. Uno sviluppo futuro potrebbe essere che nel momento in cui l'amministratore sceglie l'opzione di aggiornare una stazione sarà reindirizzato ad una pagina web con una form di modifica delle stazioni. 
 
 ![IMG_1505](https://user-images.githubusercontent.com/36625993/77827191-87cf0f00-7114-11ea-90e4-f05d33f95e7e.PNG)
 
 ![IMG_1506](https://user-images.githubusercontent.com/36625993/77827207-99b0b200-7114-11ea-8a61-a0256c3208bd.PNG)
-Come possiamo vedere se chiediamo al bot di cercarci la stazione aggiornata esso la trovera.
+Come possiamo vedere se chiediamo al bot di cercarci la stazione aggiornata esso la troverà.
 
 ***Delete Stations***
 
