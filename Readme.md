@@ -6,7 +6,7 @@
 Il tutto supporta *l’autenticazione* degli utenti.
 
 ## Descrizione
-Il linguaggio utilizzato sia a lato server che a lato client è nodeJS che offre una vasta gamma di moduli per semplificare l'approccio web.
+Si è utilizzato nodejs sia a lato server che a lato client perchè offre una vasta gamma di moduli per semplificare l'approccio web.
 I *moduli* utilizzati a lato server sono: 
 
 ```js
