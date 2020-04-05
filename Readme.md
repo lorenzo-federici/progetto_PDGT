@@ -1,12 +1,12 @@
 # Progetto PDGT di **Lorenzo Federici 278716**
 
 ## Introduzione
-*Web server RESTfull* implementanto in *nodeJS* che ha lo scopo di fornire operazioni riguardanti le *stazioni ferroviarie* in italia. Esso infatti può *visualizzarle*, *aggiungerne nuove*, *eliminarle* e *modificarle*; inoltre può anche trovare la stazione *più vicina* ad un determinato punto.
+*Web server RESTfull* implementato in *nodeJS* che ha lo scopo di fornire operazioni riguardanti le *stazioni ferroviarie* in italia. Esso infatti può *visualizzarle*, *aggiungerne nuove*, *eliminarle* e *modificarle*; inoltre può anche trovare la stazione *più vicina* ad un determinato punto.
 
 Il tutto supporta *l’autenticazione* degli utenti.
 
-## Desrizione
-Il linguaggio utilizzato sia a lato server che a lato client è nodeJS che offre una vasta gamma di moduli per semplificare l'approccio web.
+## Descrizione
+Si è utilizzato nodejs sia a lato server che a lato client perchè offre una vasta gamma di moduli per semplificare l'approccio web.
 I *moduli* utilizzati a lato server sono: 
 
 ```js
@@ -34,11 +34,11 @@ npm install bcrypt --save
 ```bash
 npm install express --save
 ```
--**geolib**: modulo utilizzato per calcolare la distanza tra dua punti geografici utilizzando Latitudine e Longitudine
+-**geolib**: modulo utilizzato per calcolare la distanza tra dua punti geografici utilizzando latitudine e longitudine
 ```bash
 npm install geolib --save
 ```
--**jsonwebtoken**: set di funzioni per utilizzare i token di accesso un volta essersi loggati
+-**jsonwebtoken**: set di funzioni per utilizzare i token di accesso una volta essersi loggati
 ```bash
 npm install jsonwebtoken --save
 ```
@@ -54,10 +54,10 @@ npm install mongoose --save
 npm install --save body-parser morgan nodemon
 ```
 
-Si è scelto l'utilizzo di mongoDB come databese base, molto piu semplice, veloce ed intuitivo dei databese di concorrenza basati sul linguaggio SQL.
-In esso si è scelto di utilizzare due tabelle una per gli **Utenti** e l'altra per le varie **Stazioni**.
+Si è scelto l'utilizzo di mongoDB come databese base poiche grazie ad un seti di funzioni è ritenuto molto piu semplice, veloce ed intuitivo dei databese di concorrenza basati sul linguaggio SQL.
+In esso si è scelto di inserire due Collezioni di documenti: una per gli **Utenti** e l'altra per le varie **Stazioni**.
 
-**Tabella Utente**
+**Collezione Utente**
 ```js
 _id:        mongoose.Schema.Types.ObjectId,
 
@@ -70,7 +70,7 @@ email:    { type:     String,
 password: { type:     String, 
             required: true}
 ```
-**Tabella Stazioni**
+**Collezione Stazioni**
 ```js
 _id:                mongoose.Schema.Types.ObjectId,
 
@@ -108,7 +108,7 @@ Per il *deploy* del server si è utilizzato il servizio web **Heroku**, ricavand
 https://progetto-pdgt-federici.herokuapp.com
 
 Riguardo il lato *client* si è scelto di implementarlo in un *bot telegram*, questo perchè è uno dei tipi di client piu semplici e intuitivi per visualizzare/manipolare i dati ricavati dalle API.
-i moduli utilizzati sono: 
+I moduli utilizzati sono: 
 ```js
 
 "axios":                 "^0.19.2",
@@ -123,10 +123,10 @@ i moduli utilizzati sono:
 
 ## Dati & Servizi esterni
 ### Dati
-I dati, riguardanti le posizioni delle stazioni, utilizzati sono ricavati dal sito [DatiOpen](http://www.datiopen.it/it/opendata/Mappa_delle_stazioni_ferroviarie_in_Italia)
+I dati riguardanti le posizioni delle stazioni utilizzati sono ricavati dal sito [DatiOpen](http://www.datiopen.it/it/opendata/Mappa_delle_stazioni_ferroviarie_in_Italia)
 
 ### Servizi esterni
-All'interno dell'app si fa uso delle *API* pubbliche messe a disposizione da [Geocode](https://geocode.xyz/api) che permetterà il reverse-geocoding di una posizione e ricavare cosi da latitudine e longitudine la regione riguardante.
+All'interno dell'app si fa uso delle *API* pubbliche messe a disposizione da [Geocode](https://geocode.xyz/api) che permettono il reverse-geocoding di una posizione e il ricavo da latitudine e longitudine della regione riguardante.
 
 ## Documentazione API
 
@@ -281,7 +281,7 @@ Richiede nell'header l'autenticazione tramite il *TOKEN*;
 ```
 https://progetto-pdgt-federici.herokuapp.com/stations/ID_STAZIONE 
 ```
-Elimina la stazione avente l'ID passato nell'url. Richiede nell'header l'autenticazione tramite il *TOKEN*, ed è riservato solo agli *admin* (ecco perchè per eliminare una stazione bisogna passare nell'url l'id, parametro che solo l'amministratore può visualizzare/sapere).
+Elimina la stazione avente l'ID passato nell'url. Richiede nell'header l'autenticazione tramite il *TOKEN*, ed è riservato solo agli *admin* (ecco perchè per eliminare una stazione bisogna passare nell'url l'id, parametro che solo l'amministratore può visualizzare/conoscere).
 
 *es.di risposta*
 ```js
@@ -307,7 +307,7 @@ Modifica una stazione avente l'ID passato nell'url. Richiede nell'header l'auten
 "Longitudine":      "Longitudine_stazione_aggiornato",
 "Latitudine":       "Latitudine_stazione_aggiornato" 
 ```
-Se si vuol cambiare soltanto un campo allora sara necessario immettere solo quel campo nella richiesta.
+Se si vuol cambiare soltanto un campo allora sarà necessario immettere solo quel campo nella richiesta.
 
 ### Utenti
 
@@ -315,7 +315,7 @@ Se si vuol cambiare soltanto un campo allora sara necessario immettere solo quel
 ```
 https://progetto-pdgt-federici.herokuapp.com/users/ 
 ```
-Restuisce tutti gli utenti registrati. Richiede nell'header l'autenticazione tramite il *TOKEN*.
+Restituisce tutti gli utenti registrati. Richiede nell'header l'autenticazione tramite il *TOKEN*.
 
 *es.di risposta*
 ```js
@@ -403,41 +403,89 @@ View Users |
 View nearest Stations | View nearest Stations
 Logout | Logout
 
+
+
+![IMG_1484](https://user-images.githubusercontent.com/36625993/77826898-b1873680-7112-11ea-8a53-06ea98362871.PNG)
+
+
+
 **USER**
 
+*Operazioni dell'utente:*
+
+![IMG_1485](https://user-images.githubusercontent.com/36625993/77826923-ebf0d380-7112-11ea-9724-915c33763989.PNG)
+
 ***View Stations***
+
+![IMG_1488](https://user-images.githubusercontent.com/36625993/77826947-19d61800-7113-11ea-9aab-b65af22fb296.PNG)
 
 *Tutte*
 
+![IMG_1489](https://user-images.githubusercontent.com/36625993/77826965-35412300-7113-11ea-801f-05aae5583b36.PNG)
+
 *Per Nome*
+
+![IMG_1490](https://user-images.githubusercontent.com/36625993/77827039-b7314c00-7113-11ea-8a43-573526ebf3d9.PNG)
 
 *Per Regione*
 
+![IMG_1491](https://user-images.githubusercontent.com/36625993/77826982-4d18a700-7113-11ea-98ce-dbd30832332e.PNG)
+
 *Per Provincia*
 
+![IMG_1492](https://user-images.githubusercontent.com/36625993/77827043-bc8e9680-7113-11ea-9be6-8605e3016f53.PNG)
+
 ***View nearest Stations***
+![IMG_1486](https://user-images.githubusercontent.com/36625993/77827054-d4661a80-7113-11ea-941d-f822c1a94eee.PNG)
+
+![IMG_1487](https://user-images.githubusercontent.com/36625993/77827057-d6c87480-7113-11ea-81df-ed4a28d25c10.PNG)
+
+![IMG_1493](https://user-images.githubusercontent.com/36625993/77827061-daf49200-7113-11ea-8b58-7a42a43779d5.PNG)
 
 ***Delete me***
 
+![IMG_1496](https://user-images.githubusercontent.com/36625993/77827089-f8296080-7113-11ea-8125-618a4d06e854.PNG)
+
 **ADMIN**
+
+*Operazioni dell'amministratore: *
+
+![IMG_1497](https://user-images.githubusercontent.com/36625993/77827093-fbbce780-7113-11ea-9c03-b0f7441cc9b4.PNG)
 
 ***View Stations***
 
-La differenza con l'utente normale è che sarà visualizzato anche l'ID, questo perchè l'amministratore potrà anche modificare, aggiungere e eliminare le stazioni. 
+![IMG_1499](https://user-images.githubusercontent.com/36625993/77827111-1727f280-7114-11ea-9cc8-93b2c6d12567.PNG)
+
+La differenza con l'utente normale è che sarà visualizzato anche l'ID. Questo perchè l'amministratore potrà anche modificare, aggiungere e eliminare le stazioni. 
 
 ***View Users***
 
+![IMG_1500](https://user-images.githubusercontent.com/36625993/77827115-1a22e300-7114-11ea-9751-c5689e2fe56b.PNG)
+
 ***Add Stations***
+![IMG_1501](https://user-images.githubusercontent.com/36625993/77827361-70445600-7115-11ea-82db-32ad12066691.PNG)
+![IMG_1509](https://user-images.githubusercontent.com/36625993/77827359-6de1fc00-7115-11ea-801f-6ec21e32710d.jpg)
 
 ***Update Stations***
 
 Quando si sceglierà questa opzione il bot chiederà le opzioni che l'utente vorrà aggiornare.
 
-Una volta scritto le opzioni da aggiornare bisognerà scrivere L'ID della stazione da aggiornare seguita dalle informazioni aggiornate, separate da uno spazio.
-Molto macchinoso , questo perchè i bot telegram non supportano le form, ma è un operazione che soltanto un amministratore può fare. Uno sviluppo futuro potrebbe essere che nel momento in cui l'amministratore sceglie l'opzione di aggiornare una stazione sarà reindirizzato ad una pagina web con una form di modifica delle stazioni. 
+![IMG_1504](https://user-images.githubusercontent.com/36625993/77827188-843b8800-7114-11ea-9047-aebd647902b0.PNG)
+
+Una volta scritte le opzioni da aggiornare bisognerà scrivere l'ID della stazione da aggiornare seguita dalle informazioni aggiornate, separate da uno spazio.
+Molto macchinoso perchè i bot telegram non supportano le form ma è un operazione che soltanto un amministratore può fare. Uno sviluppo futuro potrebbe essere che nel momento in cui l'amministratore sceglie l'opzione di aggiornare una stazione sarà reindirizzato ad una pagina web con una form di modifica delle stazioni. 
+
+![IMG_1505](https://user-images.githubusercontent.com/36625993/77827191-87cf0f00-7114-11ea-90e4-f05d33f95e7e.PNG)
+
+![IMG_1506](https://user-images.githubusercontent.com/36625993/77827207-99b0b200-7114-11ea-8a61-a0256c3208bd.PNG)
+Come possiamo vedere se chiediamo al bot di cercarci la stazione aggiornata esso la troverà.
 
 ***Delete Stations***
 
+![IMG_E6997C451B37-1](https://user-images.githubusercontent.com/36625993/77827249-d5e41280-7114-11ea-821d-7efdd41e0b00.jpeg)
+
+![IMG_1507](https://user-images.githubusercontent.com/36625993/77827264-e2686b00-7114-11ea-8969-2de4dff455c4.PNG)
+Come possiamo vedere se chiediamo al bot di cercarci la stazione eliminata non riuscirà a trovarla.
 
 
 
