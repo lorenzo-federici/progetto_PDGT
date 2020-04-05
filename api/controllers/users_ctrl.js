@@ -5,7 +5,7 @@ const bcrypt   = require('bcrypt');
 const jwt      = require('jsonwebtoken');
 //-------------------------------------------------------------
 
-const JWT_KEY = "keySecret";
+const JWT_KEY = process.env.JWT_KEY;
 
 // GET all user
 // Todo: add control for administrators only
