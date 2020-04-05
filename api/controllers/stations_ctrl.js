@@ -223,6 +223,39 @@ exports.stations_get_one_near = (req, res, next) => {
             });
     }).catch(error => {
         console.log(error);
+        //if goecode api doesn't work
+        Station
+            .find()
+            .exec()
+            .then(docs => {
+                const response = {
+                    count:   docs.length,
+                    stations: docs.map(doc => {
+                        return {
+                            Nome:      doc.Nome,
+                            Comune:    doc.Comune,
+                            Provincia: doc.Provincia,
+                            Regione:   doc.Regione,
+                            Longitudine: doc.Longitudine,
+                            Latitudine:  doc.Latitudine,
+                            _id: doc._id,
+                            request: {
+                                description: "To view this station",
+                                type: 'GET',
+                                url: 'https://progetto-pdgt-federici.herokuapp.com/stations/' + doc._id
+                            }
+                        }
+                    })
+                };
+                
+                res.status(200).json(getNearStation(home, response.count, response.stations));
+            })
+            .catch(error => {
+                res.status(500).json({
+                    error: error
+                }); 
+            });
+
     });
 
 }
