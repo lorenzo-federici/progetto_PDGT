@@ -1,7 +1,7 @@
 # Progetto PDGT di **Lorenzo Federici 278716**
 
 ## Introduzione
-*Web server RESTfull* implementato in *nodeJS* che ha lo scopo di fornire operazioni riguardanti le *stazioni ferroviarie* in italia. Esso infatti può *visualizzarle*, *aggiungerne nuove*, *eliminarle* e *modificarle*; inoltre può anche trovare la stazione *più vicina* ad un determinato punto.
+*Web server RESTfull* implementato in *nodeJS* che ha lo scopo di fornire operazioni riguardanti le *stazioni ferroviarie* nelle marche. Esso infatti può *visualizzarle*, *aggiungerne nuove*, *eliminarle* e *modificarle*; inoltre può anche trovare la stazione *più vicina* ad un determinato punto.
 
 Il tutto supporta *l’autenticazione* degli utenti.
 
@@ -54,7 +54,7 @@ npm install mongoose --save
 npm install --save body-parser morgan nodemon
 ```
 
-Si è scelto l'utilizzo di mongoDB come databese base poiche grazie ad un seti di funzioni è ritenuto molto piu semplice, veloce ed intuitivo dei databese di concorrenza basati sul linguaggio SQL.
+Si è scelto l'utilizzo di mongoDB come databese base poiche grazie ad un set di funzioni e grazie alla sua natura object oriented è ritenuto molto piu semplice, veloce ed intuitivo dei databese di concorrenza basati sul linguaggio SQL.
 In esso si è scelto di inserire due Collezioni di documenti: una per gli **Utenti** e l'altra per le varie **Stazioni**.
 
 **Collezione Utente**
