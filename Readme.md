@@ -1,7 +1,7 @@
 # Progetto PDGT di **Lorenzo Federici 278716**
 
 ## Introduzione
-*Web server RESTfull* implementato in *nodeJS* che ha lo scopo di fornire operazioni riguardanti le *stazioni ferroviarie* in italia. Esso infatti può *visualizzarle*, *aggiungerne nuove*, *eliminarle* e *modificarle*; inoltre può anche trovare la stazione *più vicina* ad un determinato punto.
+*Web server RESTfull* implementato in *nodeJS* che ha lo scopo di fornire operazioni riguardanti le *stazioni ferroviarie* nelle marche. Esso infatti può *visualizzarle*, *aggiungerne nuove*, *eliminarle* e *modificarle*; inoltre può anche trovare la stazione *più vicina* ad un determinato punto.
 
 Il tutto supporta *l’autenticazione* degli utenti.
 
