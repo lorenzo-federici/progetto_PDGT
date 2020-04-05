@@ -175,12 +175,15 @@ exports.stations_get_one_near = (req, res, next) => {
         longitude: longitude
     };
 
-    const params = {
+    /*const params = {
         locate: latitude+","+longitude,
         json: '1'
+    }*/
+    const params = {
+        geoit: 'json'
     }
 
-    axios.get('https://geocode.xyz', {params})
+    axios.get('https://geocode.xyz/'+latitude+","+longitude, {params})
     .then(response => {
 
         let findkey = {}
@@ -189,7 +192,7 @@ exports.stations_get_one_near = (req, res, next) => {
         if(response.data.state.length != undefined){
             findkey = {Regione: parameter}
         }
-        
+        console.log("work")
         Station
             .find(findkey)
             .exec()
@@ -222,7 +225,7 @@ exports.stations_get_one_near = (req, res, next) => {
                 }); 
             });
     }).catch(error => {
-        console.log(error);
+        console.log("doesn't work");
         //if goecode api doesn't work
         Station
             .find()
