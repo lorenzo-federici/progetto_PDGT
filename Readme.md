@@ -54,7 +54,7 @@ npm install mongoose --save
 npm install --save body-parser morgan nodemon
 ```
 
-Si è scelto l'utilizzo di mongoDB come databese base poiche grazie ad un seti di funzioni è ritenuto molto piu semplice, veloce ed intuitivo dei databese di concorrenza basati sul linguaggio SQL.
+Si è scelto l'utilizzo di mongoDB come databese base poiche grazie ad un set di funzioni e grazie alla sua natura object oriented è ritenuto molto piu semplice, veloce ed intuitivo dei databese di concorrenza basati sul linguaggio SQL.
 In esso si è scelto di inserire due Collezioni di documenti: una per gli **Utenti** e l'altra per le varie **Stazioni**.
 
 **Collezione Utente**
