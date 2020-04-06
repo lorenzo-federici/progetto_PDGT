@@ -1,0 +1,477 @@
+components:
+  securitySchemes:
+    bearerAuth:            
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    station_add:
+      type: object
+      properties: 
+        message:
+          type: integer
+        addedStation:
+          type: object
+          properties:
+            Nome:
+              type: string
+            Comune:
+              type: string
+            Provincia:
+              type: string
+            Regione:
+              type: string
+            Longitudine:
+              type: number
+            Latitudine:
+              type: number
+            _id:
+              type: string
+            Anno_inserimento:
+              type: string 
+            Data_inserimento: 
+              type: string
+            ID_OpenStreetMap:
+              type: number
+            request:
+              type: object
+              properties:
+                description:
+                  type: string
+                type:
+                  type: string
+                url:
+                  type: string
+    station_view:
+      type: object
+      properties:
+        count:
+          type: integer
+        stations:
+          type: object
+          properties:
+            Nome:
+              type: string
+            Comune:
+              type: string
+            Provincia:
+              type: string
+            Regione:
+              type: string
+            Longitudine:
+              type: number
+            Latitudine:
+              type: number
+            _id:
+              type: string
+            request:
+              type: object
+              properties:
+                description:
+                  type: string
+                type:
+                  type: string
+                url:
+                  type: string
+    station_near_view:
+      type: object
+      properties:
+        count:
+          type: integer
+        stations:
+          type: object
+          properties:
+            Nome:
+              type: string
+            Comune:
+              type: string
+            Provincia:
+              type: string
+            Regione:
+              type: string
+            Longitudine:
+              type: number
+            Latitudine:
+              type: number
+            _id:
+              type: string
+            Distanza:
+              type: string
+            request:
+              type: object
+              properties:
+                description:
+                  type: string
+                type:
+                  type: string
+                url:
+                  type: string
+    message_schema:
+      type: object
+      properties:   
+        message:
+          type: string
+        request:
+          type: object
+          properties:
+            type: 
+              type: string
+            url:
+              type: string
+    station_new:
+        type: object
+        properties: 
+          Nome:
+            type: string
+          Comune:
+            type: string
+          Provincia:
+            type: string
+          Regione:
+            type: string
+          Longitudine:
+            type: number
+          Latitudine:
+            type: number
+          ID_OpenStreetMap:
+            type: number
+openapi: 3.0.0
+info:
+  version: '1.0.0'
+  title: 'PDGT API'
+  description: 'API per progetto PDGT '
+
+servers:
+  - url:  https://progetto-pdgt-federici.herokuapp.com
+ 
+tags:
+- name: users
+- name: stations
+  
+paths:
+  /users/:
+    get:
+      tags: 
+      - users
+      security:
+        - bearerAuth: []
+      summary: Returns all user
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  user:
+                    type: object
+                    properties:
+                      email: 
+                        type: string
+        '500':
+          description: User not found/Token errror
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  message:
+                    type: string
+  /users/signup/:
+    post:
+      tags: 
+      - users
+      summary: Signup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '201':
+          description: User Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  message:
+                    type: string
+        '409':
+          description: Mail exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  message:
+                    type: string
+        '500':
+          description: Password Error/ Signup fail
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  message:
+                    type: string
+  /users/login/:
+    post:
+      tags: 
+      - users
+      summary: Login 
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: User Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  message:
+                    type: string
+                  token: 
+                    type: string
+                  _id:
+                    type: string
+        '401':
+          description: Auth failed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  message:
+                    type: string
+  /users/{userId}:
+    delete:
+      tags: 
+      - users
+      security:
+        - bearerAuth: []
+      summary: Delete user by ID
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: The ID of the user to return
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  message:
+                    type: string
+                  request:
+                    type: object
+                    properties:
+                      description:
+                        type: string
+                      type: 
+                        type: string
+                      body:
+                        type: object
+                        properties:
+                          email:
+                            type: string
+                          password:
+                            type: string
+                      url:
+                        type: string
+        '500':
+          description: Auth failed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  message:
+                    type: string
+  /stations/view/{option}:
+    get:
+      tags: 
+      - stations
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: option
+          in: path
+          required: true
+          description: The option you want to search
+          schema:
+            type: string
+        - name: prm
+          in: query
+          required: false
+          description: Station's parameter 
+          schema:
+            type: string
+      summary: Returns Stations
+      responses:
+        '200':
+          description: Returns Stations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/station_view'
+                  
+        '500':
+          description: error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  error:
+                    type: string
+  /stations/near/:
+    get:
+      tags: 
+      - stations
+      security:
+        - bearerAuth: []
+      summary: Return Nearest Stations
+      parameters:
+        - name: lat 
+          in: query
+          required: true
+          description: My Latitude
+          schema:
+            type: number
+        - name: long 
+          in: query
+          required: true
+          description: My Longitude
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Returns Stations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/station_near_view'
+        '500':
+          description: error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  error:
+                    type: string
+  /stations/:
+    post:
+      tags: 
+      - stations
+      security:
+        - bearerAuth: []
+      summary: Add Station
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/station_new'
+      responses:
+        '200':
+          description: Add Stations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/station_add'
+        '500':
+          description: error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  error:
+                    type: string
+  /stations/{stationId}:
+    delete:
+      tags: 
+      - stations
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: stationId
+          in: path
+          required: true
+          description: The ID of the station 
+          schema:
+            type: string
+      summary: Delete Station
+      responses:
+        '200':
+          description: Station deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/message_schema'
+        '500':
+          description: error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  message:
+                    type: string
+    patch:
+      tags: 
+      - stations
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: stationId
+          in: path
+          required: true
+          description: The ID of the station 
+          schema:
+            type: string
+      summary: Modify Station
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/station_new'
+      responses:
+        '200':
+          description: Station modified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/message_schema'
+        '500':
+          description: error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  message:
+                    type: string

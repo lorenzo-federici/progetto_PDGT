@@ -1,0 +1,714 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "PDGT API",
+    "description" : "API per progetto PDGT ",
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "https://progetto-pdgt-federici.herokuapp.com"
+  } ],
+  "tags" : [ {
+    "name" : "users"
+  }, {
+    "name" : "stations"
+  } ],
+  "paths" : {
+    "/users/" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "summary" : "Returns all user",
+        "responses" : {
+          "200" : {
+            "description" : "Successful response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "User not found/Token errror",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_500"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuth" : [ ]
+        } ]
+      }
+    },
+    "/users/signup/" : {
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Signup",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/body"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "User Created",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_500"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Mail exists",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_500"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Password Error/ Signup fail",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_500"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/login/" : {
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Login",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/body_1"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "User Created",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_1"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Auth failed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_500"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}" : {
+      "delete" : {
+        "tags" : [ "users" ],
+        "summary" : "Delete user by ID",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "The ID of the user to return",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "User deleted",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_2"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Auth failed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_500"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuth" : [ ]
+        } ]
+      }
+    },
+    "/stations/view/{option}" : {
+      "get" : {
+        "tags" : [ "stations" ],
+        "summary" : "Returns Stations",
+        "parameters" : [ {
+          "name" : "option",
+          "in" : "path",
+          "description" : "The option you want to search",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "prm",
+          "in" : "query",
+          "description" : "Station's parameter",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Returns Stations",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/station_view"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_500_1"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuth" : [ ]
+        } ]
+      }
+    },
+    "/stations/near/" : {
+      "get" : {
+        "tags" : [ "stations" ],
+        "summary" : "Return Nearest Stations",
+        "parameters" : [ {
+          "name" : "lat",
+          "in" : "query",
+          "description" : "My Latitude",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "long",
+          "in" : "query",
+          "description" : "My Longitude",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Returns Stations",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/station_near_view"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_500_1"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuth" : [ ]
+        } ]
+      }
+    },
+    "/stations/" : {
+      "post" : {
+        "tags" : [ "stations" ],
+        "summary" : "Add Station",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/station_new"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Add Stations",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/station_add"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_500_1"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuth" : [ ]
+        } ]
+      }
+    },
+    "/stations/{stationId}" : {
+      "delete" : {
+        "tags" : [ "stations" ],
+        "summary" : "Delete Station",
+        "parameters" : [ {
+          "name" : "stationId",
+          "in" : "path",
+          "description" : "The ID of the station",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Station deleted",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/message_schema"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_500"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuth" : [ ]
+        } ]
+      },
+      "patch" : {
+        "tags" : [ "stations" ],
+        "summary" : "Modify Station",
+        "parameters" : [ {
+          "name" : "stationId",
+          "in" : "path",
+          "description" : "The ID of the station",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/station_new"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Station modified",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/message_schema"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_500"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuth" : [ ]
+        } ]
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "station_add" : {
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "integer"
+          },
+          "addedStation" : {
+            "$ref" : "#/components/schemas/station_add_addedStation"
+          }
+        }
+      },
+      "station_view" : {
+        "type" : "object",
+        "properties" : {
+          "count" : {
+            "type" : "integer"
+          },
+          "stations" : {
+            "$ref" : "#/components/schemas/station_view_stations"
+          }
+        }
+      },
+      "station_near_view" : {
+        "type" : "object",
+        "properties" : {
+          "count" : {
+            "type" : "integer"
+          },
+          "stations" : {
+            "$ref" : "#/components/schemas/station_near_view_stations"
+          }
+        }
+      },
+      "message_schema" : {
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string"
+          },
+          "request" : {
+            "$ref" : "#/components/schemas/message_schema_request"
+          }
+        }
+      },
+      "station_new" : {
+        "type" : "object",
+        "properties" : {
+          "Nome" : {
+            "type" : "string"
+          },
+          "Comune" : {
+            "type" : "string"
+          },
+          "Provincia" : {
+            "type" : "string"
+          },
+          "Regione" : {
+            "type" : "string"
+          },
+          "Longitudine" : {
+            "type" : "number"
+          },
+          "Latitudine" : {
+            "type" : "number"
+          },
+          "ID_OpenStreetMap" : {
+            "type" : "number"
+          }
+        }
+      },
+      "inline_response_200" : {
+        "type" : "object",
+        "properties" : {
+          "count" : {
+            "type" : "integer"
+          },
+          "user" : {
+            "$ref" : "#/components/schemas/inline_response_200_user"
+          }
+        }
+      },
+      "inline_response_500" : {
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string"
+          }
+        }
+      },
+      "body" : {
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string"
+          },
+          "password" : {
+            "type" : "string"
+          }
+        }
+      },
+      "body_1" : {
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string"
+          },
+          "password" : {
+            "type" : "string"
+          }
+        }
+      },
+      "inline_response_200_1" : {
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string"
+          },
+          "token" : {
+            "type" : "string"
+          },
+          "_id" : {
+            "type" : "string"
+          }
+        }
+      },
+      "inline_response_200_2" : {
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string"
+          },
+          "request" : {
+            "$ref" : "#/components/schemas/inline_response_200_2_request"
+          }
+        }
+      },
+      "inline_response_500_1" : {
+        "type" : "object",
+        "properties" : {
+          "error" : {
+            "type" : "string"
+          }
+        }
+      },
+      "station_add_addedStation_request" : {
+        "type" : "object",
+        "properties" : {
+          "description" : {
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string"
+          },
+          "url" : {
+            "type" : "string"
+          }
+        }
+      },
+      "station_add_addedStation" : {
+        "type" : "object",
+        "properties" : {
+          "Nome" : {
+            "type" : "string"
+          },
+          "Comune" : {
+            "type" : "string"
+          },
+          "Provincia" : {
+            "type" : "string"
+          },
+          "Regione" : {
+            "type" : "string"
+          },
+          "Longitudine" : {
+            "type" : "number"
+          },
+          "Latitudine" : {
+            "type" : "number"
+          },
+          "_id" : {
+            "type" : "string"
+          },
+          "Anno_inserimento" : {
+            "type" : "string"
+          },
+          "Data_inserimento" : {
+            "type" : "string"
+          },
+          "ID_OpenStreetMap" : {
+            "type" : "number"
+          },
+          "request" : {
+            "$ref" : "#/components/schemas/station_add_addedStation_request"
+          }
+        }
+      },
+      "station_view_stations" : {
+        "type" : "object",
+        "properties" : {
+          "Nome" : {
+            "type" : "string"
+          },
+          "Comune" : {
+            "type" : "string"
+          },
+          "Provincia" : {
+            "type" : "string"
+          },
+          "Regione" : {
+            "type" : "string"
+          },
+          "Longitudine" : {
+            "type" : "number"
+          },
+          "Latitudine" : {
+            "type" : "number"
+          },
+          "_id" : {
+            "type" : "string"
+          },
+          "request" : {
+            "$ref" : "#/components/schemas/station_add_addedStation_request"
+          }
+        }
+      },
+      "station_near_view_stations" : {
+        "type" : "object",
+        "properties" : {
+          "Nome" : {
+            "type" : "string"
+          },
+          "Comune" : {
+            "type" : "string"
+          },
+          "Provincia" : {
+            "type" : "string"
+          },
+          "Regione" : {
+            "type" : "string"
+          },
+          "Longitudine" : {
+            "type" : "number"
+          },
+          "Latitudine" : {
+            "type" : "number"
+          },
+          "_id" : {
+            "type" : "string"
+          },
+          "Distanza" : {
+            "type" : "string"
+          },
+          "request" : {
+            "$ref" : "#/components/schemas/station_add_addedStation_request"
+          }
+        }
+      },
+      "message_schema_request" : {
+        "type" : "object",
+        "properties" : {
+          "type" : {
+            "type" : "string"
+          },
+          "url" : {
+            "type" : "string"
+          }
+        }
+      },
+      "inline_response_200_user" : {
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string"
+          }
+        }
+      },
+      "inline_response_200_2_request" : {
+        "type" : "object",
+        "properties" : {
+          "description" : {
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string"
+          },
+          "body" : {
+            "$ref" : "#/components/schemas/body_1"
+          },
+          "url" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "securitySchemes" : {
+      "bearerAuth" : {
+        "type" : "http",
+        "scheme" : "bearer",
+        "bearerFormat" : "JWT"
+      }
+    }
+  }
+}
