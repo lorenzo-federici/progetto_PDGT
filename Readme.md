@@ -1,4 +1,8 @@
-# Progetto PDGT di **Lorenzo Federici 278716**
+* Nome:      Lorenzo 
+* Cognome:   Federici 
+* Matricola: 278716
+
+# Progetto PDGT
 
 ## Introduzione
 *Web server RESTfull* implementato in *nodeJS* che ha lo scopo di fornire operazioni riguardanti le *stazioni ferroviarie* nelle marche. Esso infatti può *visualizzarle*, *aggiungerne nuove*, *eliminarle* e *modificarle*; inoltre può anche trovare la stazione *più vicina* ad un determinato punto.
