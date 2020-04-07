@@ -131,7 +131,9 @@ exports.users_delete_user = (req, res, next) => {
     const id = req.params.userId;
 
     User.findByIdAndRemove(id, (error, product) => {
-        if (error) return res.status(500).send(error);
+        if (error) return res.status(400).json({
+            message: "Wrong id"
+        });
 
         const response = {
             message: "User successfully deleted",
@@ -142,7 +144,7 @@ exports.users_delete_user = (req, res, next) => {
                 url: 'http://localhost:3000/users/signup'
             }
         };
-        return res.status(200).send(response);
+        return res.status(200).json(response);
     });
 
 }
