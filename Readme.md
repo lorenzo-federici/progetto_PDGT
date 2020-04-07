@@ -125,7 +125,7 @@ I moduli utilizzati sono:
 
 ## Dati & Servizi esterni
 ### Dati
-I dati riguardanti le posizioni delle stazioni utilizzati sono ricavati dal sito [DatiOpen](http://www.datiopen.it/it/opendata/Mappa_delle_stazioni_ferroviarie_in_Italia)
+I dati riguardanti le posizioni delle stazioni utilizzati sono ricavati dal sito [DatiOpen](http://www.datiopen.it/it/opendata/Mappa_delle_stazioni_ferroviarie_in_Italia) con licenza ODbL.
 
 ### Servizi esterni
 All'interno dell'app si fa uso delle *API* pubbliche messe a disposizione da [Geocode](https://geocode.xyz/api) che permettono il reverse-geocoding di una posizione e il ricavo da latitudine e longitudine della regione riguardante.
