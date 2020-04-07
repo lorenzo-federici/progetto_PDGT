@@ -170,96 +170,106 @@ exports.stations_get_one_near = (req, res, next) => {
     const latitude = req.query.lat;
     const longitude = req.query.long;
     
-    var home = {
-        latitude: latitude,
-        longitude: longitude
-    };
+    if(!isNaN(latitude) && !isNaN(longitude)){
+        // wrong query
 
-    /*const params = {
-        locate: latitude+","+longitude,
-        json: '1'
-    }*/
-    const params = {
-        geoit: 'json'
-    }
+        var home = {
+            latitude: latitude,
+            longitude: longitude
+        };
 
-    axios.get('https://geocode.xyz/'+latitude+","+longitude, {params})
-    .then(response => {
+        /*const params = {
+            locate: latitude+","+longitude,
+            json: '1'
+        }*/
 
-        let findkey = {}
-        const parameter = new RegExp('\\b' + response.data.state + '\\b', 'i');
-        //if goecode api doesn't work
-        if(response.data.state.length != undefined){
-            findkey = {Regione: parameter}
+        const params = {
+            geoit: 'json'
         }
-        console.log("work")
-        Station
-            .find(findkey)
-            .exec()
-            .then(docs => {
-                const response = {
-                    count:   docs.length,
-                    stations: docs.map(doc => {
-                        return {
-                            Nome:      doc.Nome,
-                            Comune:    doc.Comune,
-                            Provincia: doc.Provincia,
-                            Regione:   doc.Regione,
-                            Longitudine: doc.Longitudine,
-                            Latitudine:  doc.Latitudine,
-                            _id: doc._id,
-                            request: {
-                                description: "To view this station",
-                                type: 'GET',
-                                url: 'https://progetto-pdgt-federici.herokuapp.com/stations/' + doc._id
-                            }
-                        }
-                    })
-                };
-                
-                res.status(200).json(getNearStation(home, response.count, response.stations));
-            })
-            .catch(error => {
-                res.status(500).json({
-                    error: error
-                }); 
-            });
-    }).catch(error => {
-        console.log("doesn't work");
-        //if goecode api doesn't work
-        Station
-            .find()
-            .exec()
-            .then(docs => {
-                const response = {
-                    count:   docs.length,
-                    stations: docs.map(doc => {
-                        return {
-                            Nome:      doc.Nome,
-                            Comune:    doc.Comune,
-                            Provincia: doc.Provincia,
-                            Regione:   doc.Regione,
-                            Longitudine: doc.Longitudine,
-                            Latitudine:  doc.Latitudine,
-                            _id: doc._id,
-                            request: {
-                                description: "To view this station",
-                                type: 'GET',
-                                url: 'https://progetto-pdgt-federici.herokuapp.com/stations/' + doc._id
-                            }
-                        }
-                    })
-                };
-                
-                res.status(200).json(getNearStation(home, response.count, response.stations));
-            })
-            .catch(error => {
-                res.status(500).json({
-                    error: error
-                }); 
-            });
 
-    });
+        axios.get('https://geocode.xyz/'+latitude+","+longitude, {params})
+        .then(response => {
+
+            let findkey = {}
+            const parameter = new RegExp('\\b' + response.data.state + '\\b', 'i');
+            //if goecode api doesn't work
+            if(response.data.state.length != undefined){
+                findkey = {Regione: parameter}
+            }
+            console.log("work")
+            Station
+                .find(findkey)
+                .exec()
+                .then(docs => {
+                    const response = {
+                        count:   docs.length,
+                        stations: docs.map(doc => {
+                            return {
+                                Nome:      doc.Nome,
+                                Comune:    doc.Comune,
+                                Provincia: doc.Provincia,
+                                Regione:   doc.Regione,
+                                Longitudine: doc.Longitudine,
+                                Latitudine:  doc.Latitudine,
+                                _id: doc._id,
+                                request: {
+                                    description: "To view this station",
+                                    type: 'GET',
+                                    url: 'https://progetto-pdgt-federici.herokuapp.com/stations/' + doc._id
+                                }
+                            }
+                        })
+                    };
+                    
+                    res.status(200).json(getNearStation(home, response.count, response.stations));
+                })
+                .catch(error => {
+                    res.status(500).json({
+                        error: error
+                    }); 
+                });
+        }).catch(error => {
+            console.log("doesn't work");
+            //if goecode api doesn't work
+            Station
+                .find()
+                .exec()
+                .then(docs => {
+                    const response = {
+                        count:   docs.length,
+                        stations: docs.map(doc => {
+                            return {
+                                Nome:      doc.Nome,
+                                Comune:    doc.Comune,
+                                Provincia: doc.Provincia,
+                                Regione:   doc.Regione,
+                                Longitudine: doc.Longitudine,
+                                Latitudine:  doc.Latitudine,
+                                _id: doc._id,
+                                request: {
+                                    description: "To view this station",
+                                    type: 'GET',
+                                    url: 'https://progetto-pdgt-federici.herokuapp.com/stations/' + doc._id
+                                }
+                            }
+                        })
+                    };
+                    
+                    res.status(200).json(getNearStation(home, response.count, response.stations));
+                })
+                .catch(error => {
+                    res.status(500).json({
+                        error: error
+                    }); 
+                });
+
+        });
+
+    }else{
+        res.status(400).json({
+            message: "Wrong query"
+        }); 
+    }
 
 }
 
