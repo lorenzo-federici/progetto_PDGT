@@ -10,7 +10,7 @@
 Il tutto supporta *l’autenticazione* degli utenti.
 
 ## Descrizione
-Si è utilizzato nodejs sia a lato server che a lato client perchè offre una vasta gamma di moduli per semplificare l'approccio web.
+Si è utilizzato nodejs sia a lato server che a lato client perchè offre una vasta gamma di moduli per semplificare l'approccio web. Il server è un applicazione basata sul framework ExpressJS mentre il client è basato sul framework node-telegram-bot-api.
 I *moduli* utilizzati a lato server sono: 
 
 ```js
@@ -122,8 +122,6 @@ I moduli utilizzati sono:
 
 ```
 [BotTelegramGit](https://github.com/BillyPap3/botTelegram_PDGT)
-
-
 
 ## Dati & Servizi esterni
 ### Dati
@@ -394,6 +392,7 @@ Serve per eliminare un utente avente l'ID passato nell'url. Richiede nell'header
 ## Esempi d'uso
 
 ### Bot Telegram 
+@Prj_pdgt_BOT
 
 Le operazioni tra admin e utente normale sono differenti:
 
